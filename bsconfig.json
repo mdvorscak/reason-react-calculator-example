@@ -1,8 +1,7 @@
 {
-  "name": "react-hooks-template",
+  "name": "reason-react-calculator-example",
   "reason": {
-    "react-jsx": 3,
-    "refmt": 3
+    "react-jsx": 3
   },
   "sources": {
     "dir": "src",
