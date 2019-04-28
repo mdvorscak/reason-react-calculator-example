@@ -13,7 +13,7 @@
   "keywords": [
     "BuckleScript"
   ],
-  "author": "",
+  "author": "Michael Dvorscak",
   "license": "MIT",
   "dependencies": {
     "bs-css": "^8.0.4",

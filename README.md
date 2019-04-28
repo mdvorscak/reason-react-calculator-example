@@ -1,4 +1,4 @@
-# reason-react-demo
+# reason-react-calculator example
 
 ## Run Project
 
