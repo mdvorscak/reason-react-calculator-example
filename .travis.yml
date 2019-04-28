@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - stable
+dist: trusty
+script: # script will result in a failed build if this fails
+  - npm run build
+  - npm run webpack:production
+deploy:
+  skip_cleanup: true
+  provider: surge
+  project: ./build/
+  domain: reason-react-calculator-example.surge.sh
