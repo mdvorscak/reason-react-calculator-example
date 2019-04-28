@@ -170,6 +170,7 @@ let make = () => {
           h=60
           t="Del"
           s={Some(Styles.deleteButton)}
+          onClick={_ => dispatch(Del)}
         />
         <button
           className=Styles.operatorButton onClick={_ => dispatch(Clear)}>
