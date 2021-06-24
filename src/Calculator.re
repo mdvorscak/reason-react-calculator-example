@@ -68,13 +68,13 @@ type operator =
 
 /* State declaration */
 type state = {
-  total: int,
+  total: float,
   operator,
 };
 
 /* Action declaration */
 type action =
-  | SetNumber(int)
+  | SetNumber(float)
   | Add
   | Multiply
   | Subtract
@@ -95,18 +95,18 @@ let make = () => {
         switch (action) {
         | SetNumber(x) =>
           switch (state.operator) {
-          | Plus => {total: state.total + x, operator: Nil}
-          | Minus => {total: state.total - x, operator: Nil}
-          | Mult => {total: state.total * x, operator: Nil}
-          | Div => {total: state.total / x, operator: Nil}
+          | Plus => {total: state.total +. x, operator: Nil}
+          | Minus => {total: state.total -. x, operator: Nil}
+          | Mult => {total: state.total *. x, operator: Nil}
+          | Div => {total: state.total /. x, operator: Nil}
           | Nil =>
             switch (state.total) {
-            | 0 => {...state, total: x}
+            | 0.0 => {...state, total: x}
             | _ => {
                 ...state,
                 total:
-                  (string_of_int(state.total) ++ string_of_int(x))
-                  ->int_of_string,
+                  (Js.Float.toString(state.total) ++ Js.Float.toString(x))
+                  ->float_of_string,
               }
             }
           | _ => state
@@ -116,20 +116,21 @@ let make = () => {
         | Subtract => {...state, operator: Minus}
         | Divide => {...state, operator: Div}
         | Del =>
-          switch (state.total->abs->string_of_int->String.length) {
+          switch (state.total->abs_float->Js.Float.toString->String.length) {
           | 0
           | 1 => state
           | _ => {
               ...state,
-              total: state.total->string_of_int->pop_last_char->int_of_string,
+              total:
+                state.total->Js.Float.toString->pop_last_char->float_of_string,
             }
           }
-        | Clear => {total: 0, operator: Nil}
+        | Clear => {total: 0.0, operator: Nil}
         },
-      {total: 0, operator: Nil},
+      {total: 0.0, operator: Nil},
     );
 
-  let total = string_of_int(state.total);
+  let total = Js.Float.toString(state.total);
 
   <div className=Styles.root>
     <div className=Styles.total> {ReasonReact.string(total)} </div>
@@ -139,12 +140,12 @@ let make = () => {
            List.map(
              x =>
                <button
-                 key={string_of_int(x)}
+                 key={Js.Float.toString(x)}
                  className=Styles.button
                  onClick={_ => dispatch(SetNumber(x))}>
-                 {ReasonReact.string(string_of_int(x))}
+                 {ReasonReact.string(Js.Float.toString(x))}
                </button>,
-             [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+             [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0],
            )
            |> Array.of_list,
          )}
