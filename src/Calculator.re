@@ -118,7 +118,7 @@ let make = () => {
         | Del =>
           switch (state.total->abs_float->Js.Float.toString->String.length) {
           | 0
-          | 1 => state
+          | 1 => {...state, total: 0.0}
           | _ => {
               ...state,
               total:
